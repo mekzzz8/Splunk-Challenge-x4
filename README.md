@@ -213,3 +213,8 @@ Concepto: ¿Cuánto tardó el atacante en completar su misión?
 Cómo lo encontramos: Restamos el tiempo del primer log (10:00:01) al último (10:22:01). El resultado son 22 minutos. Un ataque extremadamente rápido que requiere respuestas automatizadas.
 
 Query: source="ataque.csv" | stats min(_time) as inicio, max(_time) as fin | eval diff_minutos=(fin-inicio)/60
+
+- - -
+Copyright (c) 2026 Jose Ignacio Navarro
+
+Licensed under the MIT License.
