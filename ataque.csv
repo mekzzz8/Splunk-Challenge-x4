@@ -1,0 +1,7 @@
+timestamp,user,source_ip,dest_ip,event_type,action,status,port,bytes
+2026-03-27 10:00:01,system,192.168.1.50,192.168.1.10,network_scan,attempt,blocked,445,0
+2026-03-27 10:05:15,admin,185.220.101.5,192.168.1.10,login,attempt,fail,22,0
+2026-03-27 10:05:25,admin,185.220.101.5,192.168.1.10,login,success,success,22,0
+2026-03-27 10:12:30,admin,192.168.1.10,91.189.91.43,download,get_file,success,443,1500000
+2026-03-27 10:18:45,system,null,null,file_modify,encrypt,success,null,25000000
+2026-03-27 10:22:00,admin,192.168.1.10,91.189.91.43,exfiltration,upload,success,443,50000000
