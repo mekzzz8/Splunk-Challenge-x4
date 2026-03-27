@@ -17,7 +17,7 @@
         input:focus { border-color: var(--neon-green); }
         button { background: var(--neon-green); color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; margin-left: 10px; text-transform: uppercase; }
         button:hover { background: #00cc33; }
-        .feedback { margin-top: 10px; font-size: 0.9em; font-weight: bold; }
+        .feedback { margin-top: 10px; font-size: 0.9em; font-weight: bold; min-height: 1.2em; }
         .footer { text-align: center; margin-top: 40px; color: #484f58; font-size: 0.8em; }
     </style>
 </head>
@@ -25,117 +25,117 @@
 
 <div class="container">
     <h1>🕵️ SOC Investigator: Challenge x4</h1>
-    <p class="intro">Analiza los logs de Splunk y encuentra las evidencias para detener el Ransomware.</p>
+    <p class="intro">Analiza los logs de Splunk y encuentra las 15 evidencias clave del ataque.</p>
 
     <div id="quiz">
         <div class="question-card">
-            <span class="q-text">1. IP que realizó el escaneo inicial (Puerto 445):</span>
+            <span class="q-text">1. ¿Qué IP interna fue el objetivo del escaneo inicial (puerto 445)?</span>
             <input type="text" id="p1" placeholder="Ej: 192.168.1.1">
-            <button onclick="check(1, '192.168.1.50')">Validar</button>
+            <button onclick="check(1, '192.168.1.10')">Validar</button>
             <div id="res1" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">2. IP interna objetivo del escaneo:</span>
-            <input type="text" id="p2" placeholder="Respuesta...">
-            <button onclick="check(2, '192.168.1.10')">Validar</button>
+            <span class="q-text">2. ¿Qué IP realizó ese escaneo de red (IP atacante inicial)?</span>
+            <input type="text" id="p2" placeholder="IP Atacante">
+            <button onclick="check(2, '192.168.1.50')">Validar</button>
             <div id="res2" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">3. Número de intentos fallidos de login (Brute Force):</span>
+            <span class="q-text">3. ¿Cuántos intentos fallidos de login (Brute Force) se detectaron?</span>
             <input type="text" id="p3" placeholder="Número">
             <button onclick="check(3, '2')">Validar</button>
             <div id="res3" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">4. IP externa que logró el acceso SSH (Login Success):</span>
-            <input type="text" id="p4" placeholder="IP">
+            <span class="q-text">4. ¿Qué IP externa logró el acceso SSH (Login Success)?</span>
+            <input type="text" id="p4" placeholder="IP Externa">
             <button onclick="check(4, '185.220.101.5')">Validar</button>
             <div id="res4" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">5. Usuario comprometido:</span>
+            <span class="q-text">5. ¿Qué usuario fue el objetivo del compromiso?</span>
             <input type="text" id="p5" placeholder="Username">
             <button onclick="check(5, 'admin')">Validar</button>
             <div id="res5" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">6. Puerto de entrada utilizado:</span>
+            <span class="q-text">6. ¿En qué puerto se detectó el acceso exitoso?</span>
             <input type="text" id="p6" placeholder="Número de puerto">
             <button onclick="check(6, '22')">Validar</button>
             <div id="res6" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">7. IP consultada vía DNS (C&C Check):</span>
+            <span class="q-text">7. ¿Qué IP DNS fue consultada sospechosamente a las 10:10:00?</span>
             <input type="text" id="p7" placeholder="IP DNS">
             <button onclick="check(7, '8.8.8.8')">Validar</button>
             <div id="res7" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">8. IP del servidor de descarga del malware:</span>
-            <input type="text" id="p8" placeholder="IP externa">
+            <span class="q-text">8. ¿Cuál es la IP del servidor externo donde se descargó el malware?</span>
+            <input type="text" id="p8" placeholder="IP Servidor">
             <button onclick="check(8, '91.189.91.43')">Validar</button>
             <div id="res8" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">9. Tamaño total del malware (Bytes):</span>
-            <input type="text" id="p9" placeholder="Número exacto">
+            <span class="q-text">9. ¿Cuántos bytes tiene el archivo de malware (get_file)?</span>
+            <input type="text" id="p9" placeholder="Bytes">
             <button onclick="check(9, '1500000')">Validar</button>
             <div id="res9" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">10. Hora de finalización de descarga (HH:MM:SS):</span>
+            <span class="q-text">10. ¿A qué hora exacta terminó la descarga del malware (HH:MM:SS)?</span>
             <input type="text" id="p10" placeholder="10:xx:xx">
             <button onclick="check(10, '10:12:30')">Validar</button>
             <div id="res10" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">11. Estado final del cifrado (Ransomware):</span>
-            <input type="text" id="p11" placeholder="success/fail">
-            <button onclick="check(11, 'success')">Validar</button>
+            <span class="q-text">11. ¿Qué acción de sistema se detectó a las 10:18:45?</span>
+            <input type="text" id="p11" placeholder="Ej: encrypt">
+            <button onclick="check(11, 'encrypt')">Validar</button>
             <div id="res11" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">12. Volumen total cifrado (Bytes):</span>
-            <input type="text" id="p12" placeholder="Número">
+            <span class="q-text">12. ¿Cuántos bytes totales de datos fueron cifrados?</span>
+            <input type="text" id="p12" placeholder="Número de bytes">
             <button onclick="check(12, '25000000')">Validar</button>
             <div id="res12" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">13. Acción detectada a las 10:22:00:</span>
-            <input type="text" id="p13" placeholder="upload/download/scan">
-            <button onclick="check(13, 'upload')">Validar</button>
+            <span class="q-text">13. ¿Qué tipo de evento se registró a las 10:22:00?</span>
+            <input type="text" id="p13" placeholder="Ej: exfiltration">
+            <button onclick="check(13, 'exfiltration')">Validar</button>
             <div id="res13" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">14. Datos totales robados (Exfiltración):</span>
-            <input type="text" id="p14" placeholder="Número">
+            <span class="q-text">14. ¿Cuál fue el volumen de datos robados/exfiltrados (Bytes)?</span>
+            <input type="text" id="p14" placeholder="Bytes">
             <button onclick="check(14, '50000000')">Validar</button>
             <div id="res14" class="feedback"></div>
         </div>
 
         <div class="question-card">
-            <span class="q-text">15. Duración total del ataque (Minutos):</span>
-            <input type="text" id="p15" placeholder="Número">
+            <span class="q-text">15. Duración total del incidente en minutos (desde el escaneo al robo):</span>
+            <input type="text" id="p15" placeholder="Minutos">
             <button onclick="check(15, '22')">Validar</button>
             <div id="res15" class="feedback"></div>
         </div>
     </div>
 
     <div class="footer">
-        [ PROYECTO FINAL CIBERSEGURIDAD 2026 - SPLUNK CHALLENGE X4 ]
+        [ PROYECTO CIBERSEGURIDAD 2026 - SPLUNK CHALLENGE X4 - APPLE M4 ARCHITECTURE ]
     </div>
 </div>
 
