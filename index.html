@@ -2,50 +2,156 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reto SOC: Splunk Challenge x4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splunk Challenge x4 | SOC Investigation</title>
     <style>
-        body { background: #0d1117; color: #c9d1d9; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .card { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 10px; width: 100%; max-width: 600px; }
-        h1 { color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
-        .pregunta { margin-bottom: 20px; padding: 10px; border-left: 4px solid #238636; background: #0d1117; }
-        input { background: #010409; border: 1px solid #30363d; color: white; padding: 8px; border-radius: 5px; width: 60%; }
-        button { background: #238636; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
-        .feedback { font-weight: bold; margin-top: 5px; }
+        :root { --neon-green: #00ff41; --dark-bg: #0d1117; --card-bg: #161b22; }
+        body { background-color: var(--dark-bg); color: var(--neon-green); font-family: 'Courier New', Courier, monospace; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: auto; border: 1px solid var(--neon-green); padding: 40px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); }
+        h1 { text-align: center; border-bottom: 2px solid var(--neon-green); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; }
+        .intro { margin-bottom: 30px; color: #8b949e; text-align: center; }
+        .question-card { background: var(--card-bg); border: 1px solid #30363d; padding: 20px; margin-bottom: 20px; border-radius: 5px; transition: 0.3s; }
+        .question-card:hover { border-color: var(--neon-green); }
+        .q-text { font-weight: bold; margin-bottom: 10px; display: block; }
+        input { background: #010409; border: 1px solid #30363d; color: #fff; padding: 10px; width: 70%; border-radius: 4px; outline: none; }
+        input:focus { border-color: var(--neon-green); }
+        button { background: var(--neon-green); color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; margin-left: 10px; text-transform: uppercase; }
+        button:hover { background: #00cc33; }
+        .feedback { margin-top: 10px; font-size: 0.9em; font-weight: bold; }
+        .footer { text-align: center; margin-top: 40px; color: #484f58; font-size: 0.8em; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🔍 Investigador SOC: Challenge x4</h1>
-        <p>Usa los logs de Splunk para responder a las evidencias del ataque:</p>
 
-        <div class="pregunta">
-            <p>1. ¿Cuál es la IP externa del atacante?</p>
-            <input type="text" id="p1" placeholder="Respuesta...">
-            <button onclick="verificar(1, '185.220.101.5')">Check</button>
+<div class="container">
+    <h1>🕵️ SOC Investigator: Challenge x4</h1>
+    <p class="intro">Analiza los logs de Splunk y encuentra las evidencias para detener el Ransomware.</p>
+
+    <div id="quiz">
+        <div class="question-card">
+            <span class="q-text">1. IP que realizó el escaneo inicial (Puerto 445):</span>
+            <input type="text" id="p1" placeholder="Ej: 192.168.1.1">
+            <button onclick="check(1, '192.168.1.50')">Validar</button>
             <div id="res1" class="feedback"></div>
         </div>
 
-        <div class="pregunta">
-            <p>2. ¿Cuántos bytes totales fueron exfiltrados (robados)?</p>
+        <div class="question-card">
+            <span class="q-text">2. IP interna objetivo del escaneo:</span>
             <input type="text" id="p2" placeholder="Respuesta...">
-            <button onclick="verificar(2, '50000000')">Check</button>
+            <button onclick="check(2, '192.168.1.10')">Validar</button>
             <div id="res2" class="feedback"></div>
         </div>
-        
+
+        <div class="question-card">
+            <span class="q-text">3. Número de intentos fallidos de login (Brute Force):</span>
+            <input type="text" id="p3" placeholder="Número">
+            <button onclick="check(3, '2')">Validar</button>
+            <div id="res3" class="feedback"></div>
         </div>
 
-    <script>
-        function verificar(num, correcta) {
-            let userAns = document.getElementById('p' + num).value.trim();
-            let feedback = document.getElementById('res' + num);
-            if(userAns === correcta) {
-                feedback.innerHTML = "✅ ¡Correcto! Evidencia confirmada.";
-                feedback.style.color = "#3fb950";
-            } else {
-                feedback.innerHTML = "❌ Incorrecto. Revisa los logs en Splunk.";
-                feedback.style.color = "#f85149";
-            }
+        <div class="question-card">
+            <span class="q-text">4. IP externa que logró el acceso SSH (Login Success):</span>
+            <input type="text" id="p4" placeholder="IP">
+            <button onclick="check(4, '185.220.101.5')">Validar</button>
+            <div id="res4" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">5. Usuario comprometido:</span>
+            <input type="text" id="p5" placeholder="Username">
+            <button onclick="check(5, 'admin')">Validar</button>
+            <div id="res5" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">6. Puerto de entrada utilizado:</span>
+            <input type="text" id="p6" placeholder="Número de puerto">
+            <button onclick="check(6, '22')">Validar</button>
+            <div id="res6" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">7. IP consultada vía DNS (C&C Check):</span>
+            <input type="text" id="p7" placeholder="IP DNS">
+            <button onclick="check(7, '8.8.8.8')">Validar</button>
+            <div id="res7" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">8. IP del servidor de descarga del malware:</span>
+            <input type="text" id="p8" placeholder="IP externa">
+            <button onclick="check(8, '91.189.91.43')">Validar</button>
+            <div id="res8" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">9. Tamaño total del malware (Bytes):</span>
+            <input type="text" id="p9" placeholder="Número exacto">
+            <button onclick="check(9, '1500000')">Validar</button>
+            <div id="res9" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">10. Hora de finalización de descarga (HH:MM:SS):</span>
+            <input type="text" id="p10" placeholder="10:xx:xx">
+            <button onclick="check(10, '10:12:30')">Validar</button>
+            <div id="res10" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">11. Estado final del cifrado (Ransomware):</span>
+            <input type="text" id="p11" placeholder="success/fail">
+            <button onclick="check(11, 'success')">Validar</button>
+            <div id="res11" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">12. Volumen total cifrado (Bytes):</span>
+            <input type="text" id="p12" placeholder="Número">
+            <button onclick="check(12, '25000000')">Validar</button>
+            <div id="res12" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">13. Acción detectada a las 10:22:00:</span>
+            <input type="text" id="p13" placeholder="upload/download/scan">
+            <button onclick="check(13, 'upload')">Validar</button>
+            <div id="res13" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">14. Datos totales robados (Exfiltración):</span>
+            <input type="text" id="p14" placeholder="Número">
+            <button onclick="check(14, '50000000')">Validar</button>
+            <div id="res14" class="feedback"></div>
+        </div>
+
+        <div class="question-card">
+            <span class="q-text">15. Duración total del ataque (Minutos):</span>
+            <input type="text" id="p15" placeholder="Número">
+            <button onclick="check(15, '22')">Validar</button>
+            <div id="res15" class="feedback"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        [ PROYECTO FINAL CIBERSEGURIDAD 2026 - SPLUNK CHALLENGE X4 ]
+    </div>
+</div>
+
+<script>
+    function check(id, correct) {
+        let val = document.getElementById('p' + id).value.trim();
+        let feedback = document.getElementById('res' + id);
+        if(val.toLowerCase() === correct.toLowerCase()) {
+            feedback.innerHTML = ">>> ACCESO CONCEDIDO: Evidencia Verificada.";
+            feedback.style.color = "#00ff41";
+        } else {
+            feedback.innerHTML = ">>> ERROR: Datos inconsistentes con los logs.";
+            feedback.style.color = "#ff3131";
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
