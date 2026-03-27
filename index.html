@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reto SOC: Splunk Challenge x4</title>
+    <style>
+        body { background: #0d1117; color: #c9d1d9; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
+        .card { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 10px; width: 100%; max-width: 600px; }
+        h1 { color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        .pregunta { margin-bottom: 20px; padding: 10px; border-left: 4px solid #238636; background: #0d1117; }
+        input { background: #010409; border: 1px solid #30363d; color: white; padding: 8px; border-radius: 5px; width: 60%; }
+        button { background: #238636; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔍 Investigador SOC: Challenge x4</h1>
+        <p>Usa los logs de Splunk para responder a las evidencias del ataque:</p>
+
+        <div class="pregunta">
+            <p>1. ¿Cuál es la IP externa del atacante?</p>
+            <input type="text" id="p1" placeholder="Respuesta...">
+            <button onclick="verificar(1, '185.220.101.5')">Check</button>
+            <div id="res1" class="feedback"></div>
+        </div>
+
+        <div class="pregunta">
+            <p>2. ¿Cuántos bytes totales fueron exfiltrados (robados)?</p>
+            <input type="text" id="p2" placeholder="Respuesta...">
+            <button onclick="verificar(2, '50000000')">Check</button>
+            <div id="res2" class="feedback"></div>
+        </div>
+        
+        </div>
+
+    <script>
+        function verificar(num, correcta) {
+            let userAns = document.getElementById('p' + num).value.trim();
+            let feedback = document.getElementById('res' + num);
+            if(userAns === correcta) {
+                feedback.innerHTML = "✅ ¡Correcto! Evidencia confirmada.";
+                feedback.style.color = "#3fb950";
+            } else {
+                feedback.innerHTML = "❌ Incorrecto. Revisa los logs en Splunk.";
+                feedback.style.color = "#f85149";
+            }
+        }
+    </script>
+</body>
+</html>
